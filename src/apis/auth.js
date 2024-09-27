@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const BACKEND_URL = 'http://localhost:3000/api'
+// const BACKEND_URL = 'http://localhost:3000/api'
+const BACKEND_URL = 'https://vistaar-backend.onrender.com/api'
 
 
 export const login = async (data) => {
