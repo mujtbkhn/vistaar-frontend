@@ -45,7 +45,7 @@ const SignUp = () => {
 
         if (validateForm()) {
             try {
-                const response = await signup({ name, email, password });
+                const response = await signup(name, email, password );
                 if (response) {
                     navigate('/');  // Navigate to home page after successful signup
                 } else {

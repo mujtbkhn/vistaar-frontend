@@ -38,7 +38,7 @@ const Login = () => {
 
         if (validateForm()) {
             try {
-                const response = await login({ email, password });
+                const response = await login(email, password);
                 if (response && response.token) {
                     localStorage.setItem('token', response.token);
                     navigate('/');
