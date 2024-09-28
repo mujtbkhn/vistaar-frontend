@@ -4,56 +4,55 @@ import { login } from '../apis/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [errors, setErrors] = useState({});
-    const [apiError, setApiError] = useState('');
-
-    const navigate = useNavigate()
-    const validateForm = async () => {
-        let formErrors = {};
-
-        // Email validation
-        if (!email) {
-            formErrors.email = 'Email is required';
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            formErrors.email = 'Email is invalid';
-        }
-
-        // Password validation
-        if (!password) {
-            formErrors.password = 'Password is required';
-        } else if (password.length < 6) {
-            formErrors.password = 'Password must be at least 6 characters';
-        }
-
-        setErrors(formErrors);
-        return Object.keys(formErrors).length === 0;
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setApiError('');
-
-        if (validateForm()) {
-            try {
-                const response = await login(email, password);
-                if (response && response.token) {
-                    localStorage.setItem('token', response.token);
-                    navigate('/');
-                } else {
-                    setApiError('Login failed. Please try again.');
-                }
-            } catch (error) {
-                if (error.response && error.response.data && error.response.data.message) {
-                    setApiError(error.response.data.message);
-                } else {
-                    setApiError('An error occurred. Please try again later.');
+        const [email, setEmail] = useState('');
+        const [password, setPassword] = useState('');
+        const [showPassword, setShowPassword] = useState(false);
+        const [errors, setErrors] = useState({});
+        const [apiError, setApiError] = useState('');
+    
+        const navigate = useNavigate()
+    
+        const validateForm = () => {
+            let formErrors = {};
+    
+            if (!email) {
+                formErrors.email = 'Email is required';
+            } else if (!/\S+@\S+\.\S+/.test(email)) {
+                formErrors.email = 'Email is invalid';
+            }
+    
+            if (!password) {
+                formErrors.password = 'Password is required';
+            } else if (password.length < 6) {
+                formErrors.password = 'Password must be at least 6 characters';
+            }
+    
+            setErrors(formErrors);
+            return Object.keys(formErrors).length === 0;
+        };
+    
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            setApiError('');
+    
+            if (validateForm()) {
+                try {
+                    const response = await login(email, password);
+                    if (response && response.token) {
+                        localStorage.setItem('token', response.token);
+                        navigate('/');
+                    } else {
+                        setApiError('Login failed. Please try again.');
+                    }
+                } catch (error) {
+                    if (error.response && error.response.data && error.response.data.message) {
+                        setApiError(error.response.data.message);
+                    } else {
+                        setApiError('An error occurred. Please try again later.');
+                    }
                 }
             }
-        }
-    };
+        };
 
     return (
         <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
