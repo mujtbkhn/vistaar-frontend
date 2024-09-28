@@ -1,18 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode'; // Default import for jwt-decode
+import { jwtDecode } from 'jwt-decode'; 
 
 const Home = () => {
     const navigate = useNavigate();
 
-    // Decode the token and extract the username
-    const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
+    const token = localStorage.getItem('token'); 
     const decodedToken = token ? jwtDecode(token) : null;
     const username = decodedToken?.name;
 
     const handleLogout = () => {
-        localStorage.clear(); // Clear local storage on logout
-        navigate('/login'); // Redirect to the login page
+        localStorage.clear(); 
+        navigate('/login'); 
     };
 
     return (

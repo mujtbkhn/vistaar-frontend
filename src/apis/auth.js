@@ -6,7 +6,9 @@ const BACKEND_URL = 'https://vistaar-backend.onrender.com/api'
 
 export const login = async (data) => {
     try {
-        const response = await axios.post(`${BACKEND_URL}/login`, data)
+        const response = await axios.post(`${BACKEND_URL}/login`,
+            { data }
+        )
         return response.data
     } catch (error) {
         if (error.response) {
@@ -21,7 +23,9 @@ export const login = async (data) => {
 
 export const signup = async (data) => {
     try {
-        const response = await axios.post(`${BACKEND_URL}/signup`, data)
+        const response = await axios.post(`${BACKEND_URL}/signup`,
+            { data }
+        )
         return response.data
     } catch (error) {
         if (error.response) {
